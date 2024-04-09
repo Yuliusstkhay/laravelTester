@@ -14,12 +14,13 @@ class InstagramController extends Controller
      * @return view
      */
     public function compare(){
-        $mengikuti = json_decode(file_get_contents('public\IG\following.json'));
+        $pathOri = "D:\instagram\baru";
+        $mengikuti = json_decode(file_get_contents("$pathOri/connections/followers_and_following/following.json"));
         foreach($mengikuti->relationships_following as $list){
             $newMengikuti[] = $list->string_list_data[0]->value;
         }
         
-        $pengikut = json_decode(file_get_contents('public\IG\followers_1.json'));
+        $pengikut = json_decode(file_get_contents("$pathOri/connections/followers_and_following/followers_1.json"));
         foreach($pengikut as $list){
             $newPengikut[] = $list->string_list_data[0]->value;
         }
