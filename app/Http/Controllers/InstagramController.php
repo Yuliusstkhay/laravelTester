@@ -30,6 +30,7 @@ class InstagramController extends Controller
                 $compare[] = $list;
             }
         }
-        return $compare;
+        sort($compare);
+        return view('instagram', ['data' => $compare]);
     }
 }
