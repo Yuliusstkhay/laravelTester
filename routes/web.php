@@ -23,4 +23,5 @@ Route::get('/', function(){
     return ['Yus' => 'Chika'];
 });
 Route::get('instagram/compare', [InstagramController::class, 'compare']);
+Route::post('instagram/save', [InstagramController::class, 'save'])->name('ig.save');
 Route::get('jwt', [JWTController::class, 'index']);
