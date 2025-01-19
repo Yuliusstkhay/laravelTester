@@ -30,7 +30,7 @@
      <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link rel="shortcut icon" href="{{asset('public/favicon.ico')}}" type="image/x-icon">
 </head>
 <body>
     <h1 style="text-align: center;">List Unfollow IG</h1>
@@ -52,6 +52,7 @@
             </tbody>
         </table>
         <div style="text-align: right; margin-top: 25px;">
+            <button class="btn btn-success" id="tandai" type="button"><i class="bi bi-bookmark-check-fill"></i> Tandai atau Lepas Semua</button>
             <button class="btn btn-primary" id="save"><i class="bi bi-floppy"></i> Save</button>
         </div>
     </div>
@@ -60,6 +61,8 @@
         let data = []
 
         $(document).ready(()=>{
+            let initTandai = false
+
             $('#table').DataTable({
                 lengthMenu: [ [7, 10, 12, 25, 50, 100, -1], [7, 10, 12, 25, 50, 100, "All"] ]
             })
@@ -106,6 +109,14 @@
                         })
                     }                    
                 })
+            })
+
+            $('#tandai').click(()=>{
+                $('table .acc').each((k, v)=>{
+                    v.checked = !initTandai
+                    $(v).trigger('change')
+                })
+                initTandai = !initTandai
             })
         })
     </script>

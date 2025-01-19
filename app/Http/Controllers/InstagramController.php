@@ -16,7 +16,7 @@ class InstagramController extends Controller
      * @return view
      */
     public function compare(){
-        $pathOri = "C:\Users\Yulius\Videos\ig";
+        $pathOri = "D:\instagram/baru";
         $mengikuti = json_decode(file_get_contents("$pathOri/connections/followers_and_following/following.json"));
         foreach($mengikuti->relationships_following as $list){
             $newMengikuti[] = $list->string_list_data[0]->value;
@@ -27,9 +27,10 @@ class InstagramController extends Controller
             $newPengikut[] = $list->string_list_data[0]->value;
         }
 
+        $listIgLolos = (Instagram::pluck('ig')->toArray());
         foreach($newMengikuti as $list){
-            $cekAccount = Instagram::where('ig', $list)->first();
-            if(!in_array($list, $newPengikut) && $cekAccount == null){
+            $exist = in_array($list, $listIgLolos);
+            if(!in_array($list, $newPengikut) && $exist !== true){
                 $compare[] = $list;
             }
         }
@@ -51,6 +52,7 @@ class InstagramController extends Controller
                     |    CEK EXISTING DATA    |
                     -------------------------*/
                     if(Instagram::where('ig', $list)->first() !== null){
+                        continue;
                         DB::rollBack();
                         return ['result' => false, 'message' => "$list has been exist"];
                     }
