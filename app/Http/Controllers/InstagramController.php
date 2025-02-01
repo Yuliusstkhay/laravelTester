@@ -27,6 +27,7 @@ class InstagramController extends Controller
             $newPengikut[] = $list->string_list_data[0]->value;
         }
 
+        $compare = [];
         $listIgLolos = (Instagram::pluck('ig')->toArray());
         foreach($newMengikuti as $list){
             $exist = in_array($list, $listIgLolos);
